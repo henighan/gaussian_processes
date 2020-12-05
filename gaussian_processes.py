@@ -27,16 +27,18 @@ def main():
     x_train = x[train_inds]
     y_train = y[train_inds]
     sigma = np.array([[radial_basis_fn(x1, x2) for x1 in x] for x2 in x])
-    sigma_train_train = sigma[train_inds, train_inds]
-    sigma_test_test = sigma[test_inds, test_inds]
-    sigma_train_test = sigma[train_inds, test_inds]
-    print("sigma_train_test", sigma_train_test.shape)
+    sigma_train_train = sigma[train_inds, :][:, train_inds]
+    sigma_test_test = sigma[test_inds, :][:, test_inds]
+    sigma_train_test = sigma[train_inds, :][:, test_inds]
     sigma_test_train = sigma_train_test.transpose()
-    print("sigma_test_train", sigma_test_train.shape)
-    # plt.plot(x, y)
+    predicted_means = sigma[:, train_inds] @ np.linalg.pinv(sigma_train_train) @ y_train
+    plt.plot(x_train, y_train, linestyle="", marker="o", label="training data")
+    plt.plot(x, y, label="true")
+    plt.plot(x, predicted_means, label="predicted")
+    plt.legend()
     # plt.imshow(sigma)
     # plt.colorbar()
-    # plt.show()
+    plt.show()
 
 
 if __name__ == "__main__":
