@@ -22,7 +22,9 @@ def main():
         sampled_amplitude = random.uniform(amplitude_min, amplitude_max)
         y += sampled_amplitude * np.sin(2 * np.pi * sampled_frequency * x)
 
-    train_inds = np.sort(np.random.randint(0, n_points_to_plot, size=training_set_size))
+    train_inds = np.random.choice(
+        n_points_to_plot, size=training_set_size, replace=False
+    )
     test_inds = np.array(list(set(range(n_points_to_plot)).difference(set(train_inds))))
     x_train = x[train_inds]
     y_train = y[train_inds]
@@ -31,7 +33,7 @@ def main():
     sigma_test_test = sigma[test_inds, :][:, test_inds]
     sigma_train_test = sigma[train_inds, :][:, test_inds]
     sigma_test_train = sigma_train_test.transpose()
-    predicted_means = sigma[:, train_inds] @ np.linalg.pinv(sigma_train_train) @ y_train
+    predicted_means = sigma[:, train_inds] @ np.linalg.inv(sigma_train_train) @ y_train
     plt.plot(x_train, y_train, linestyle="", marker="o", label="training data")
     plt.plot(x, y, label="true")
     plt.plot(x, predicted_means, label="predicted")
