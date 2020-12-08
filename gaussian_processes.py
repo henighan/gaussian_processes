@@ -1,7 +1,13 @@
+"""
+Standalone script for generating some random "ground truth" data, and fitting
+gaussian-processes predictor to it
+"""
 from typing import Tuple
 import random
+
 import numpy as np
 from matplotlib import pyplot as plt
+from fire import Fire
 
 
 def main(n_points: int = 300, n_frequencies: int = 3, training_set_size: int = 10):
@@ -85,4 +91,4 @@ def generate_plot(
 
 
 if __name__ == "__main__":
-    main()
+    Fire(main)
