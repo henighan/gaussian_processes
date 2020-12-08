@@ -4,13 +4,13 @@ I wanted to try coding up a simple gaussian-processes predictor to help solidify
 
 ![Example Output](./example_output.png)
 
-## Installation
+## Install
 Requires python3
 ```bash
 pip3 install -r requirements.txt
 ```
 
-## Running
+## Run It
 ```bash
 python ./gaussian_processes.py
 ```
