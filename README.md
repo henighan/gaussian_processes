@@ -6,9 +6,11 @@ I wanted to try coding up a simple gaussian-processes predictor to help solidify
 
 ## Installation
 Requires python3
-```console
+```bash
 pip3 install -r requirements.txt
 ```
 
 ## Running
+```bash
 python ./gaussian_processes.py
+```
